@@ -1,0 +1,44 @@
+server:
+  port: 9000
+
+spring:
+  application:
+    name: grad-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+      routes:
+        - id: grad-data-monitoring
+          uri: lb://grad-data-monitoring
+          predicates:
+            - Path=/api/data/**
+          filters:
+            - StripPrefix=1
+        - id: grad-content-production
+          uri: lb://grad-content-production
+          predicates:
+            - Path=/api/content/**
+          filters:
+            - StripPrefix=1
+        - id: grad-university-forum
+          uri: lb://grad-university-forum
+          predicates:
+            - Path=/api/forum/**
+          filters:
+            - StripPrefix=1
+        - id: grad-teacher-student-interaction
+          uri: lb://grad-teacher-student-interaction
+          predicates:
+            - Path=/api/interaction/**
+          filters:
+            - StripPrefix=1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true

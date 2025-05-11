@@ -1,0 +1,41 @@
+# 通用忽略规则
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE相关
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+
+# 前端相关
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# 后端相关
+backend/target/
+backend/**/target/
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+application-*.yml
+application-*.properties
+!application-example.yml
+!application-example.properties 
