@@ -1,72 +1,95 @@
 package com.grad.interaction.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+import lombok.Data;
+
+/**
+ * 活动实体类
+ */
+@Data
+@TableName("activity")
 public class Activity {
+
+  @TableId(type = IdType.AUTO)
   private Long id;
+
+  /**
+   * 活动标题
+   */
   private String title;
+
+  /**
+   * 活动描述
+   */
   private String description;
-  private String type; // quiz, qa, game
-  private String createdBy;
-  private Date createTime;
-  private Boolean isActive;
 
-  public Activity() {
-  }
+  /**
+   * 活动地点
+   */
+  private String location;
 
-  public Long getId() {
-    return id;
-  }
+  /**
+   * 活动开始时间
+   */
+  private LocalDateTime startTime;
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+  /**
+   * 活动结束时间
+   */
+  private LocalDateTime endTime;
 
-  public String getTitle() {
-    return title;
-  }
+  /**
+   * 活动类型 1-讲座 2-研讨会 3-实践活动 4-文体活动 5-其他
+   */
+  private Integer type;
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+  /**
+   * 活动封面图URL
+   */
+  private String coverUrl;
 
-  public String getDescription() {
-    return description;
-  }
+  /**
+   * 组织者ID
+   */
+  private Long organizerId;
 
-  public void setDescription(String description) {
-    this.description = description;
-  }
+  /**
+   * 组织者名称
+   */
+  private String organizerName;
 
-  public String getType() {
-    return type;
-  }
+  /**
+   * 活动状态 0-筹备中 1-报名中 2-进行中 3-已结束 4-已取消
+   */
+  private Integer status;
 
-  public void setType(String type) {
-    this.type = type;
-  }
+  /**
+   * 报名截止时间
+   */
+  private LocalDateTime registrationDeadline;
 
-  public String getCreatedBy() {
-    return createdBy;
-  }
+  /**
+   * 最大参与人数，0表示不限制
+   */
+  private Integer maxParticipants;
 
-  public void setCreatedBy(String createdBy) {
-    this.createdBy = createdBy;
-  }
+  /**
+   * 当前参与人数
+   */
+  private Integer currentParticipants;
 
-  public Date getCreateTime() {
-    return createTime;
-  }
+  /**
+   * 创建时间
+   */
+  private LocalDateTime createTime;
 
-  public void setCreateTime(Date createTime) {
-    this.createTime = createTime;
-  }
-
-  public Boolean getIsActive() {
-    return isActive;
-  }
-
-  public void setIsActive(Boolean isActive) {
-    this.isActive = isActive;
-  }
+  /**
+   * 更新时间
+   */
+  private LocalDateTime updateTime;
 }

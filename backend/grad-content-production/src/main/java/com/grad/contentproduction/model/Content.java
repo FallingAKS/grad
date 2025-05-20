@@ -1,72 +1,88 @@
 package com.grad.contentproduction.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.List;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
+import lombok.Data;
+
+/**
+ * 内容实体类
+ */
+@Data
+@TableName("content")
 public class Content {
+
+  @TableId(type = IdType.AUTO)
   private Long id;
+
+  /**
+   * 标题
+   */
   private String title;
+
+  /**
+   * 摘要
+   */
+  private String summary;
+
+  /**
+   * 内容
+   */
   private String content;
-  private String author;
-  private Date createTime;
-  private Date updateTime;
-  private String status; // 草稿、已保存、已发布
 
-  public Content() {
-  }
+  /**
+   * 封面图URL
+   */
+  private String coverUrl;
 
-  public Long getId() {
-    return id;
-  }
+  /**
+   * 分类
+   */
+  private String category;
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+  /**
+   * 标签，JSON格式存储
+   */
+  private String tags;
 
-  public String getTitle() {
-    return title;
-  }
+  /**
+   * 作者ID
+   */
+  private Long authorId;
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+  /**
+   * 作者名称
+   */
+  private String authorName;
 
-  public String getContent() {
-    return content;
-  }
+  /**
+   * 创建时间
+   */
+  private LocalDateTime createTime;
 
-  public void setContent(String content) {
-    this.content = content;
-  }
+  /**
+   * 更新时间
+   */
+  private LocalDateTime updateTime;
 
-  public String getAuthor() {
-    return author;
-  }
+  /**
+   * 状态 0-草稿 1-已发布
+   */
+  private Integer status;
 
-  public void setAuthor(String author) {
-    this.author = author;
-  }
+  /**
+   * 浏览量
+   */
+  private Integer viewCount;
 
-  public Date getCreateTime() {
-    return createTime;
-  }
-
-  public void setCreateTime(Date createTime) {
-    this.createTime = createTime;
-  }
-
-  public Date getUpdateTime() {
-    return updateTime;
-  }
-
-  public void setUpdateTime(Date updateTime) {
-    this.updateTime = updateTime;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
+  /**
+   * 标签列表，非数据库字段
+   */
+  @TableField(exist = false)
+  private List<String> tagList;
 }
