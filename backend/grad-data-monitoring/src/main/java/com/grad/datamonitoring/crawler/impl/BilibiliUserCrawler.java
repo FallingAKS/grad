@@ -27,10 +27,26 @@ public class BilibiliUserCrawler {
 
   private static final Logger logger = LoggerFactory.getLogger(BilibiliUserCrawler.class);
   private static final String SOURCE_NAME = "Bilibili";
-  private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36";
+
+  // 用户代理列表，模拟不同浏览器
+  private static final String[] USER_AGENTS = {
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36",
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.0 Safari/605.1.15",
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/93.0",
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36 Edg/94.0.992.47"
+  };
+
+  // 代理IP池
+  private static final String[] PROXY_IPS = {
+      "127.0.0.1:8090",
+      "127.0.0.1:8091",
+      "127.0.0.1:8092"
+  };
+
   private static final int TIMEOUT = 10000; // 10秒超时
   private static final int MIN_DELAY = 1000; // 最小延迟1秒
   private static final int MAX_DELAY = 5000; // 最大延迟5秒
+  private static final int MAX_RETRY = 3; // 最大重试次数
 
   private final ObjectMapper objectMapper = new ObjectMapper();
   private final Random random = new Random();
@@ -48,7 +64,7 @@ public class BilibiliUserCrawler {
       String userUrl = "https://space.bilibili.com/" + uid;
 
       // 获取用户主页
-      Document userDoc = getDocument(userUrl);
+      Document userDoc = getDocumentWithRetry(userUrl);
       if (userDoc == null) {
         logger.error("获取用户主页失败");
         return results;
@@ -85,7 +101,7 @@ public class BilibiliUserCrawler {
 
         // 获取视频详情页
         randomDelay();
-        Document videoDoc = getDocument(videoUrl);
+        Document videoDoc = getDocumentWithRetry(videoUrl);
         if (videoDoc != null) {
           Map<String, Object> videoInfo = new HashMap<>();
           videoInfo.put("bvid", bvid);
@@ -140,13 +156,51 @@ public class BilibiliUserCrawler {
   }
 
   /**
-   * 获取HTML文档
+   * 获取HTML文档（带重试和代理）
    */
-  private Document getDocument(String url) throws IOException {
-    return Jsoup.connect(url)
-        .userAgent(USER_AGENT)
-        .timeout(TIMEOUT)
-        .get();
+  private Document getDocumentWithRetry(String url) {
+    int retryCount = 0;
+    while (retryCount < MAX_RETRY) {
+      try {
+        // 随机选择用户代理
+        String userAgent = USER_AGENTS[random.nextInt(USER_AGENTS.length)];
+
+        // 随机选择代理IP（如果启用）
+        boolean useProxy = random.nextBoolean(); // 随机决定是否使用代理
+
+        // 创建连接
+        if (useProxy) {
+          String proxyIp = PROXY_IPS[random.nextInt(PROXY_IPS.length)];
+          String[] parts = proxyIp.split(":");
+          String proxyHost = parts[0];
+          int proxyPort = Integer.parseInt(parts[1]);
+
+          logger.info("使用代理: {}:{}", proxyHost, proxyPort);
+
+          return Jsoup.connect(url)
+              .userAgent(userAgent)
+              .timeout(TIMEOUT)
+              .proxy(proxyHost, proxyPort)
+              .get();
+        } else {
+          return Jsoup.connect(url)
+              .userAgent(userAgent)
+              .timeout(TIMEOUT)
+              .get();
+        }
+      } catch (IOException e) {
+        retryCount++;
+        logger.error("获取页面失败，第{}次重试: {}", retryCount, url, e);
+
+        if (retryCount < MAX_RETRY) {
+          // 延迟后重试
+          randomDelay();
+        }
+      }
+    }
+
+    logger.error("获取页面失败，已达到最大重试次数: {}", url);
+    return null;
   }
 
   /**

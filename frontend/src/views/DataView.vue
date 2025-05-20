@@ -64,7 +64,30 @@
 </template>
 
 <script setup lang="ts">
-// 数据监控相关逻辑
+// 数据监控中心逻辑
+import { MonitoringData } from "@/types/monitoring";
+import { ref } from "vue";
+
+const monitoringData = ref<MonitoringData>({
+  labels: [],
+  followerData: [],
+  videoData: [],
+  articleData: [],
+});
+
+const fetchMonitoringData = async () => {
+  try {
+    const response = await fetch("/api/monitoring");
+    const data = await response.json();
+    monitoringData.value = data;
+  } catch (error) {
+    console.error("获取监控数据失败", error);
+  }
+};
+
+onMounted(() => {
+  fetchMonitoringData();
+});
 </script>
 
 <style scoped>
