@@ -5,9 +5,11 @@
 <template>
   <div class="app">
     <header class="app-header">
-      <div class="logo">高校融媒体中心技术系统</div>
       <nav>
-        <router-link to="/">首页</router-link>
+        <router-link to="/">
+          <img src="./assets/white.png" alt="logo" />
+          高校融媒体中心技术系统
+        </router-link>
         <router-link to="/data">数据监控</router-link>
         <router-link to="/content">内容生产</router-link>
         <router-link to="/forum">高校论坛</router-link>
@@ -51,7 +53,7 @@ body {
 }
 
 .app-header {
-  background-color: #304156;
+  background-color: white;
   color: white;
   padding: 0 20px;
   height: 60px;
@@ -108,10 +110,10 @@ main {
 }
 
 .app-footer {
-  background-color: #304156;
+  background-color: #2e6eea;
   color: #cfd4dc;
   text-align: center;
-  padding: 15px;
+  padding: 6px;
   font-size: 14px;
 }
 </style>

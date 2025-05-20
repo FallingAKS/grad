@@ -6,7 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class AiService {
-  private static final String DEEPSEEK_URL = "http://deepseek-api-url";
+  private static final String DEEPSEEK_URL = "https://llm.chutes.ai/v1/chat/completions";
   private final RestTemplate restTemplate = new RestTemplate();
 
   public String predictContent(String input) {
