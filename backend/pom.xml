@@ -18,7 +18,6 @@
     <description>高校融媒体中心技术系统后端服务</description>
     
     <modules>
-        <module>grad-common</module>
         <module>grad-eureka</module>
         <module>grad-gateway</module>
         <module>grad-data-monitoring</module>
