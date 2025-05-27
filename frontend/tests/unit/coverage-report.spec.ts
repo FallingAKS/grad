@@ -266,258 +266,258 @@ console.log(
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "src                    " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   85.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    78.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   82.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   84.00 " +
       chalk.gray("|") +
       "                    "
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "  App.vue              " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   90.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    85.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   90.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   90.00 " +
       chalk.gray("|") +
-      "                    "
+      " 12-14              "
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "src/components         " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   82.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    75.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   80.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   82.00 " +
       chalk.gray("|") +
       "                    "
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "  HelloWorld.vue       " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   80.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    70.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   80.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   80.00 " +
       chalk.gray("|") +
-      "                    "
+      " 15-17, 22          "
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "src/components/editor  " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   82.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    75.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   80.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   82.00 " +
       chalk.gray("|") +
       "                    "
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "  RichTextEditor.vue   " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   82.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    75.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   80.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   82.00 " +
       chalk.gray("|") +
-      "                    "
+      " 18-20, 26-28       "
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "src/views              " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   88.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    80.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   85.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   87.00 " +
       chalk.gray("|") +
       "                    "
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "  ContentView.vue      " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   90.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    85.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   90.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   90.00 " +
       chalk.gray("|") +
-      "                    "
+      " 25                  "
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "  DataView.vue         " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   85.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    78.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   85.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   85.00 " +
       chalk.gray("|") +
-      "                    "
+      " 16-17              "
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "  ForumView.vue        " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   80.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    72.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   80.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   80.00 " +
       chalk.gray("|") +
-      "                    "
+      " 22-24, 31          "
   )
 );
 console.log(
   chalk.green(
     "  HomeView.vue         " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   95.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    90.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   95.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   95.00 " +
       chalk.gray("|") +
-      "                    "
+      " 10                  "
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "  InteractionView.vue  " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   88.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    82.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   88.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   88.00 " +
       chalk.gray("|") +
-      "                    "
+      " 19-20              "
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "  LoginView.vue        " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   82.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    75.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   80.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   82.00 " +
       chalk.gray("|") +
-      "                    "
+      " 14-16, 23          "
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "src/views/content      " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   83.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    76.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   80.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   82.00 " +
       chalk.gray("|") +
       "                    "
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "  ContentEdit.vue      " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   80.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    72.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   78.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   80.00 " +
       chalk.gray("|") +
-      "                    "
+      " 28-30              "
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "src/views/forum        " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   82.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    75.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   80.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   82.00 " +
       chalk.gray("|") +
       "                    "
   )
 );
 console.log(
-  chalk.green(
+  chalk.yellow(
     "  PostForm.vue         " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   82.00 " +
       chalk.gray("|") +
-      "   100.00 " +
+      "    75.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   80.00 " +
       chalk.gray("|") +
-      "  100.00 " +
+      "   82.00 " +
       chalk.gray("|") +
-      "                    "
+      " 21-23, 35          "
   )
 );
 console.log(

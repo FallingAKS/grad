@@ -1,65 +1,74 @@
 package com.grad.universityforum.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.grad.universityforum.model.Post;
+import com.grad.universityforum.model.Result;
 import com.grad.universityforum.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/forum/posts")
 public class PostController {
 
-  private final PostService postService;
-
   @Autowired
-  public PostController(PostService postService) {
-    this.postService = postService;
-  }
+  private PostService postService;
 
   @GetMapping
-  public List<Post> getAllPosts() {
-    return postService.getAllPosts();
+  public Result<Page<Post>> getPostList(
+      @RequestParam(required = false) Long categoryId,
+      @RequestParam(defaultValue = "1") Integer pageNum,
+      @RequestParam(defaultValue = "10") Integer pageSize) {
+    Page<Post> posts = postService.getPostList(categoryId, pageNum, pageSize);
+    return Result.success(posts);
   }
 
   @GetMapping("/{id}")
-  public ResponseEntity<Post> getPostById(@PathVariable Long id) {
+  public Result<Post> getPostById(@PathVariable Long id) {
     Post post = postService.getPostById(id);
-    if (post != null) {
-      return ResponseEntity.ok(post);
+    if (post == null) {
+      return Result.error("帖子不存在");
     }
-    return ResponseEntity.notFound().build();
+    return Result.success(post);
   }
 
   @PostMapping
-  public Post createPost(@RequestBody Post post) {
-    return postService.createPost(post);
+  public Result<Long> createPost(@RequestBody Post post) {
+    if (post.getTitle() == null || post.getTitle().trim().isEmpty()) {
+      return Result.error("标题不能为空");
+    }
+    if (post.getContent() == null || post.getContent().trim().isEmpty()) {
+      return Result.error("内容不能为空");
+    }
+    Long postId = postService.createPost(post);
+    return Result.success(postId);
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post post) {
+  public Result<Boolean> updatePost(@PathVariable Long id, @RequestBody Post post) {
     post.setId(id);
-    Post updatedPost = postService.updatePost(post);
-    if (updatedPost != null) {
-      return ResponseEntity.ok(updatedPost);
+    boolean success = postService.updatePost(post);
+    if (!success) {
+      return Result.error("帖子不存在");
     }
-    return ResponseEntity.notFound().build();
+    return Result.success(true);
   }
 
   @DeleteMapping("/{id}")
-  public ResponseEntity<Void> deletePost(@PathVariable Long id) {
-    postService.deletePost(id);
-    return ResponseEntity.ok().build();
+  public Result<Boolean> deletePost(@PathVariable Long id) {
+    boolean success = postService.deletePost(id);
+    if (!success) {
+      return Result.error("帖子不存在");
+    }
+    return Result.success(true);
   }
 
   @PostMapping("/{id}/like")
-  public ResponseEntity<Post> likePost(@PathVariable Long id) {
+  public Result<Post> likePost(@PathVariable Long id) {
     Post post = postService.likePost(id);
-    if (post != null) {
-      return ResponseEntity.ok(post);
+    if (post == null) {
+      return Result.error("帖子不存在");
     }
-    return ResponseEntity.notFound().build();
+    return Result.success(post);
   }
 }
