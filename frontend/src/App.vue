@@ -1,34 +1,47 @@
 <script setup lang="ts">
-// App逻辑
+import { User } from "@element-plus/icons-vue";
+import { ElAvatar, ElConfigProvider, ElMenu, ElMenuItem } from "element-plus";
+import "element-plus/dist/index.css";
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+const activeRoute = computed(() => route.path);
 </script>
 
 <template>
-  <div class="app">
-    <header class="app-header">
-      <nav>
-        <router-link to="/">
-          <img src="./assets/white.png" alt="logo" />
-          高校融媒体中心技术系统
-        </router-link>
-        <router-link to="/data">数据监控</router-link>
-        <router-link to="/content">内容生产</router-link>
-        <router-link to="/forum">高校论坛</router-link>
-        <router-link to="/interaction">师生互动</router-link>
-      </nav>
-      <div class="user-menu">
-        <span class="username">用户名</span>
-        <router-link to="/login" class="logout">退出</router-link>
-      </div>
-    </header>
+  <el-config-provider>
+    <div class="app">
+      <!-- 顶部导航栏 -->
+      <header class="header">
+        <!-- 导航菜单 -->
+        <el-menu
+          :default-active="activeRoute"
+          class="main-menu"
+          mode="horizontal"
+          :router="true"
+          background-color="transparent"
+          text-color="#fff"
+          active-text-color="#fff"
+        >
+          <el-menu-item index="/">高校融媒体中心技术系统</el-menu-item>
+          <el-menu-item index="/school-forum">高校论坛</el-menu-item>
+          <el-menu-item index="/interactive">师生互动</el-menu-item>
+        </el-menu>
 
-    <main>
-      <router-view />
-    </main>
+        <!-- 用户信息 -->
+        <div class="user-info">
+          <el-avatar :size="40" :icon="User" />
+          <span class="user-text">个人中心</span>
+        </div>
+      </header>
 
-    <footer class="app-footer">
-      <p>© 2025 高校融媒体中心技术系统 | 版权所有</p>
-    </footer>
-  </div>
+      <!-- 主要内容区域 -->
+      <main class="main-content">
+        <router-view></router-view>
+      </main>
+    </div>
+  </el-config-provider>
 </template>
 
 <style>
@@ -38,12 +51,9 @@
   box-sizing: border-box;
 }
 
-html,
 body {
-  font-family: "Microsoft YaHei", Arial, sans-serif;
-  color: #333;
+  font-family: "Microsoft YaHei", sans-serif;
   background-color: #f5f7fa;
-  height: 100%;
 }
 
 .app {
@@ -52,68 +62,81 @@ body {
   flex-direction: column;
 }
 
-.app-header {
-  background-color: white;
-  color: white;
-  padding: 0 20px;
-  height: 60px;
+/* 顶部导航栏样式 */
+.header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  background: linear-gradient(90deg, #1557c0 0%, #1674da 100%);
+  color: white;
+  padding: 0;
+  height: 60px;
+  position: relative;
+}
+
+/* Logo 区域 */
+.logo-container {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 100%;
+  background-color: #1557c0;
+  width: 300px;
 }
 
 .logo {
-  font-size: 20px;
+  width: 36px;
+  height: 36px;
+  margin-right: 10px;
+}
+
+.system-name {
+  font-size: 18px;
   font-weight: bold;
+  white-space: nowrap;
 }
 
-nav {
-  display: flex;
-}
-
-nav a {
-  color: #cfd4dc;
-  text-decoration: none;
-  padding: 0 15px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  transition: all 0.3s;
-}
-
-nav a:hover,
-nav a.router-link-active {
-  color: white;
-  background-color: #263445;
-}
-
-.user-menu {
-  display: flex;
-  align-items: center;
-}
-
-.username {
-  margin-right: 15px;
-}
-
-.logout {
-  color: #cfd4dc;
-  text-decoration: none;
-}
-
-.logout:hover {
-  color: white;
-}
-
-main {
+/* 覆盖Element Plus菜单样式 */
+.main-menu {
+  border-bottom: none !important;
   flex: 1;
+  background-color: transparent !important;
 }
 
-.app-footer {
-  background-color: #2e6eea;
-  color: #cfd4dc;
-  text-align: center;
-  padding: 6px;
+.el-menu--horizontal .el-menu-item {
+  height: 60px !important;
+  line-height: 60px !important;
+  border-bottom: none !important;
+  color: white !important;
+  font-size: 16px;
+}
+
+.el-menu--horizontal .el-menu-item.is-active {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-bottom: 3px solid white !important;
+}
+
+.el-menu--horizontal .el-menu-item:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* 用户信息区域 */
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 100%;
+  cursor: pointer;
+}
+
+.user-text {
+  margin-left: 10px;
   font-size: 14px;
+}
+
+/* 主要内容区域 */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f5f7fa;
 }
 </style>

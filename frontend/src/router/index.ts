@@ -1,39 +1,41 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+const routes = [
+  {
+    path: "/",
+    name: "Home",
+    component: () => import("../views/HomeView.vue"),
+  },
+  {
+    path: "/school-forum",
+    name: "SchoolForum",
+    component: () => import("../views/ForumView.vue"),
+  },
+  {
+    path: "/interactive",
+    name: "Interactive",
+    component: () => import("../views/InteractionView.vue"),
+  },
+  {
+    path: "/data",
+    name: "Data",
+    component: () => import("../views/DataView.vue"),
+  },
+  {
+    path: "/content",
+    name: "Content",
+    component: () => import("../views/ContentView.vue"),
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import("../views/LoginView.vue"),
+  },
+];
+
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: "/",
-      name: "home",
-      component: () => import("../views/HomeView.vue"),
-    },
-    {
-      path: "/login",
-      name: "login",
-      component: () => import("../views/LoginView.vue"),
-    },
-    {
-      path: "/data",
-      name: "data",
-      component: () => import("../views/DataView.vue"),
-    },
-    {
-      path: "/content",
-      name: "content",
-      component: () => import("../views/ContentView.vue"),
-    },
-    {
-      path: "/forum",
-      name: "forum",
-      component: () => import("../views/ForumView.vue"),
-    },
-    {
-      path: "/interaction",
-      name: "interaction",
-      component: () => import("../views/InteractionView.vue"),
-    },
-  ],
+  history: createWebHistory(),
+  routes,
 });
 
 export default router;

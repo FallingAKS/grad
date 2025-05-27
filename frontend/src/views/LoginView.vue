@@ -5,11 +5,21 @@
       <form @submit.prevent="handleLogin">
         <div class="form-group">
           <label for="username">用户名</label>
-          <input type="text" id="username" v-model="username" required />
+          <input
+            type="text"
+            id="username"
+            v-model="loginForm.username"
+            required
+          />
         </div>
         <div class="form-group">
           <label for="password">密码</label>
-          <input type="password" id="password" v-model="password" required />
+          <input
+            type="password"
+            id="password"
+            v-model="loginForm.password"
+            required
+          />
         </div>
         <div class="form-group remember">
           <input type="checkbox" id="remember" v-model="remember" />
@@ -24,21 +34,23 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { useUserStore } from "../stores/user";
 
 const router = useRouter();
-const username = ref("");
-const password = ref("");
+const userStore = useUserStore();
+
+const loginForm = ref({
+  username: "",
+  password: "",
+});
 const remember = ref(false);
 
-const handleLogin = () => {
-  console.log("登录:", {
-    username: username.value,
-    password: password.value,
-    remember: remember.value,
-  });
-  // 这里应该添加真实的登录逻辑
-  // 模拟登录成功，跳转到首页
-  router.push("/");
+const handleLogin = async () => {
+  try {
+    await userStore.login(loginForm.value);
+  } catch (error) {
+    console.error("登录失败:", error);
+  }
 };
 </script>
 
